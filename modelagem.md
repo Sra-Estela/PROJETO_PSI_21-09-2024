@@ -51,7 +51,85 @@ nav ul li a {
 .content {
     padding: 20px;
 }
+h1 {
+    text-align: center;
+    color: #333;
+}
+p{
+    text-align: center;
+}
 
+.div {
+    width: center;
+    height: 72vh;
+    border-radius: 5px;
+    background: #B2B2B2;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.div1 {
+    border-radius: 5px;
+    width: 300px;
+    height: 300px;
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+input {
+    border-radius: 5px;
+    border: solid 1px;
+    color: rgb(131, 129, 129);
+    padding: 6px 40px;
+    margin: 3px; 
+    text-align: left;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+}
+button {
+    width: center;
+    background-color: blue; 
+    border-radius: 5px;
+    border: none;
+    color: white;
+    padding: 6px 30px;
+    width: 50%;
+    margin: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 17px;
+}
+button:hover {
+    width: center;
+    background-color: blue; 
+    border-radius: 5px none ;
+    border: none;
+    color: white;
+    padding: 6px 30px;
+    width: 50%;
+    margin: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 17px;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+form label{
+    margin-right: 12rem;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 ```
 
 ## Conteúdo `base.html`:
@@ -85,7 +163,9 @@ nav ul li a {
 {% block title %}Página Inicial{% endblock %}
 {% block content %}
 <h1>Bem-vindo ao Sistema de Gerenciamento</h1>
-<p>Este é um sistema para gerenciar recursos.</p>
+<p>
+    Este é um sistema para gerenciar recursos. para saber mais sobre, acesse as nossas informações.
+</p>
 {% endblock %}
 ```
 
@@ -94,16 +174,20 @@ nav ul li a {
 {% extends "base.html" %}
 {% block title %}Login{% endblock %}
 {% block content %}
-<h1>Login</h1>
-<form action="{{ url_for('login') }}" method="POST">
-    <label for="email">Email:</label>
-    <input type="email" name="email" required>
-    
-    <label for="password">Senha:</label>
-    <input type="password" name="password" required>
-    
-    <button type="submit">Login</button>
-</form>
+<div class="div">
+    <div class="div1">
+        <h1>Login</h1>
+        <form action="{{ url_for('login') }}" method="POST">
+            <label for="email">Email:</label>
+            <input type="email" name="email" required>
+            
+            <label for="password">Senha:</label>
+            <input type="password" name="password" required>
+            
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</div>
 {% endblock %}
 ```
 
@@ -112,14 +196,18 @@ nav ul li a {
 {% extends "base.html" %}
 {% block title %}Gerenciar Recursos{% endblock %}
 {% block content %}
-<h1>Gerenciar Recursos</h1>
-<p>Aqui você pode adicionar, editar ou remover recursos.</p>
-<a href="{{ url_for('add_resource') }}">Adicionar Recurso</a>
-<ul>
-    {% for resource in resources %}
-    <li>{{ resource.name }} - <a href="{{ url_for('edit_resource', id=resource.id) }}">Editar</a> | <a href="{{ url_for('delete_resource', id=resource.id) }}">Excluir</a></li>
-    {% endfor %}
-</ul>
+<div class="div">
+    <div class="div1">
+        <h1>Gerenciar Recursos</h1>
+        <p>Aqui você pode adicionar, editar ou remover recursos.</p>
+        <a href="{{ url_for('add_resource') }}">Adicionar Recurso</a>
+        <ul>
+            {% for resource in resources %}
+            <li>{{ resource.name }} - <a href="{{ url_for('edit_resource', id=resource.id) }}">Editar</a> | <a href="{{ url_for('delete_resource', id=resource.id) }}">Excluir</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
 {% endblock %}
 ```
 
@@ -128,19 +216,23 @@ nav ul li a {
 {% extends "base.html" %}
 {% block title %}Registrar Usuário{% endblock %}
 {% block content %}
-<h1>Registrar</h1>
-<form action="{{ url_for('register') }}" method="POST">
-    <label for="name">Nome:</label>
-    <input type="text" name="name" required>
+<div class="div"> 
+    <div class="div1">
+        <h1>Registrar</h1>
+        <form action="{{ url_for('register') }}" method="POST">
+            <label for="name">Nome:</label>
+            <input type="text" name="name" placeholder="Nome" required>
 
-    <label for="email">Email:</label>
-    <input type="email" name="email" required>
+            <label for="email">Email:</label>
+            <input type="email" name="email" placeholder="Email" required>
 
-    <label for="password">Senha:</label>
-    <input type="password" name="password" required>
+            <label for="password">Senha:</label>
+            <input type="password" name="password" placeholder="Senha" required>
 
-    <button type="submit">Registrar</button>
-</form>
+            <button type="submit">Criar</button>
+        </form>
+    </div>
+</div>
 {% endblock %}
 ```
 
@@ -149,10 +241,14 @@ nav ul li a {
 {% extends "base.html" %}
 {% block title %}Detalhes do Recurso{% endblock %}
 {% block content %}
-<h1>Detalhes do Recurso</h1>
-<p><strong>Nome:</strong> {{ resource.name }}</p>
-<p><strong>Categoria:</strong> {{ resource.category }}</p>
-<a href="{{ url_for('list_resources') }}">Voltar à lista de recursos</a>
+<div class="div">
+    <div class="div1">
+        <h1>Detalhes do Recurso</h1>
+        <p><strong>Nome:</strong> {{ resource.name }}</p>
+        <p><strong>Categoria:</strong> {{ resource.category }}</p>
+        <a href="{{ url_for('list_resources') }}">Voltar à lista de recursos</a>
+    </div>
+</div>
 {% endblock %}
 ```
 
@@ -187,7 +283,7 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        user = User.query.filter_by(email=email).first()
+        user = User.query.filter_by(email=email).first() #ESTÁ DANDO ERRO NESSA LINHA.
         if user and check_password_hash(user.password, password):
             login_user(user)  # Substituindo session por login_user
             return redirect(url_for('index'))
@@ -293,8 +389,8 @@ db = SQLAlchemy()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
+    name = db.Column(db.String(200), nullable=False)
+    email = db.Column(db.String(200), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
 
     def __repr__(self):
@@ -302,8 +398,8 @@ class User(db.Model):
 
 class Resource(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    category = db.Column(db.String(100), nullable=False)
+    name = db.Column(db.String(200), nullable=False)
+    category = db.Column(db.String(200), nullable=False)
 
     def __repr__(self):
         return f'<Resource {self.name}>'
